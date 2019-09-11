@@ -5,7 +5,7 @@ A simple homebrew for testing the input data on the PS Vita™ made on [Lua Play
 
 This is a fork of SMOKE5's [VitaTester](https://github.com/SMOKE5/VitaTester)       
 **At no point am I claiming this as mine,** this was just made to test myself that I 
-could port it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
+could convert it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
 since I'm still learning and it was made as a fun learning experience. 
 
 
