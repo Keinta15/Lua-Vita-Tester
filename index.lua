@@ -2,7 +2,7 @@
 Lua Vita Tester v1.0 by Keinta15            
 
 This is a fork of SMOKE5's VitaTester (https://github.com/SMOKE5/VitaTester) at no point am I claiming this as mine,
-this was just made to test myself that I could port it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
+this was just made to test myself that I could convert it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
 since I'm still learning and it was made as a fun learning experience. 
 ]]
 
