@@ -35,7 +35,7 @@ font = Font.load("app0:/resources/font.ttf")
 Font.setPixelSizes(font,25)
 
 --\*init sounds*/
---[[ it crashes?
+--[[ it crashes? see line 191
 Sound.init()
 snd1 = Sound.openOgg("app0:/resources/Sound1.ogg")
 ]]
@@ -67,7 +67,7 @@ while true do
 	
 	--\* init sticks/touch registration*/
 	rx,ry = Controls.readRightAnalog()
-    lx,ly = Controls.readLeftAnalog()
+        lx,ly = Controls.readLeftAnalog()
 	tx1, ty1, tx2, ty2, tx3, ty3, tx4, ty4, tx5, ty5, tx6, ty6 = Controls.readTouch()
 	rtx1, rty1, rtx2, rty2, rtx4, rty4 = Controls.readRetroTouch()
 	
@@ -98,49 +98,49 @@ while true do
 	--\* Draw cross button if pressed */
 	if Controls.check(pad, cross) then
 		Graphics.drawImage(830, 202, crossimg)
-    end
+        end
 	--\* Draw square button if pressed */
 	if Controls.check(pad, square) then
 		Graphics.drawImage(790, 165, squareimg)
-    end
+        end
 	--\* Draw circle button if pressed */
 	if Controls.check(pad, circle) then
 		Graphics.drawImage(869, 165, circleimg)
-    end
+        end
     --\* Draw triangle button if pressed */
 	if Controls.check(pad, triangle) then
 		Graphics.drawImage(830, 127, triangleimg)
-    end
+        end
     --\* Draw start button if pressed */
 	if Controls.check(pad, start) then
 		Graphics.drawImage(841, 373, startimg)
-    end
+        end
     --\* Draw select button if pressed */
 	if Controls.check(pad, select) then
 		Graphics.drawImage(781, 375, selectimg)
-    end
+        end
     --\* Draw right trigger button if pressed */
 	if Controls.check(pad, rtrigger) then
 		Graphics.drawImage(720, 40, rtriggerimg)
-    end
+        end
     --\* Draw left trigger button if pressed */
 	if Controls.check(pad, ltrigger) then
 		Graphics.drawImage(38, 40, ltriggerimg)
-    end
+        end
     --\* Draw up directional button if pressed */ x113, y91
 	if Controls.check(pad, up) then
 		Graphics.drawImage(59, 134, dpad)
-    end
+        end
     --\* Draw down directional button if pressed */
 	if Controls.check(pad, down) then
-		--Graphics.drawRotateImage(94, 231, dpad, 3.14) couldn't make the intergers to work? I may be dumb
+	      --Graphics.drawRotateImage(94, 231, dpad, 3.14) couldn't make the intergers to work? I may be dumb
 		Graphics.drawImage(59, 190, downimg)
-    end
+        end
     --\* Draw left directional button if pressed */
 	if Controls.check(pad, left) then
-		--Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work 
+	      --Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work 
 		Graphics.drawImage(25, 167, leftimg)
-    end
+        end
     --\* Draw right directional button if pressed */
 	if Controls.check(pad, right) then
 		--Graphics.drawRotateImage(123, 203, dpad, 1.57) couldn't make the intergers to work 
@@ -167,7 +167,7 @@ while true do
 		Graphics.drawImage(tx6- 50,ty6- 56.5, frontTouch)
 	end
 
--- -50 and -56.5 added because image wasn't placed under finger
+    -- -50 and -56.5 added because image wasn't placed under finger
 
 	--\* Draw front touch on screen */
 	if rtx1 ~= nil then
@@ -196,7 +196,7 @@ while true do
 	]]
 
 	--\* Controls to exit app */
-    if Controls.check(pad, start) and Controls.check(pad, select) then
+        if Controls.check(pad, start) and Controls.check(pad, select) then
 		Graphics.freeImage(bg)
 		Font.unload(font)
 		Sound.term()
