@@ -68,7 +68,7 @@ end
 
 --\*main loop*/
 while true do
-    pad = Controls.read()
+        pad = Controls.read()
 	--\*init battery stats*/
 	battpercent = System.getBatteryPercentage() 
 	if System.isBatteryCharging() then
@@ -79,10 +79,16 @@ while true do
 	
 	--\* init sticks/touch registration*/
 	rx,ry = Controls.readRightAnalog()
-    lx,ly = Controls.readLeftAnalog()
+        lx,ly = Controls.readLeftAnalog()
 	tx1, ty1, tx2, ty2, tx3, ty3, tx4, ty4, tx5, ty5, tx6, ty6 = Controls.readTouch()
 	rtx1, rty1, rtx2, rty2, rtx4, rty4 = Controls.readRetroTouch()
 	
+	for i=1,2 do
+		if hsnd1[i] and not Sound.isPlaying(hsnd1[i]) then
+			Sound.close(hsnd1[i])
+			hsnd1[i]=nil
+		end
+	end
 	--\* ui */
 	--\*Starting drawing phase*/
 	Graphics.initBlend()
@@ -110,50 +116,50 @@ while true do
 	--\* Draw cross button if pressed */
 	if Controls.check(pad, cross) then
 		Graphics.drawImage(830, 202, crossimg)
-    end
+        end
 	--\* Draw square button if pressed */
 	if Controls.check(pad, square) then
 		Graphics.drawImage(790, 165, squareimg)
-    end
+        end
 	--\* Draw circle button if pressed */
 	if Controls.check(pad, circle) then
 		Graphics.drawImage(869, 165, circleimg)
-    end
-    --\* Draw triangle button if pressed */
+        end
+        --\* Draw triangle button if pressed */
 	if Controls.check(pad, triangle) then
 		Graphics.drawImage(830, 127, triangleimg)
-    end
-    --\* Draw start button if pressed */
+        end
+        --\* Draw start button if pressed */
 	if Controls.check(pad, start) then
 		Graphics.drawImage(841, 373, startimg)
-    end
-    --\* Draw select button if pressed */
+        end
+        --\* Draw select button if pressed */
 	if Controls.check(pad, select) then
 		Graphics.drawImage(781, 375, selectimg)
-    end
-    --\* Draw right trigger button if pressed */
+        end
+        --\* Draw right trigger button if pressed */
 	if Controls.check(pad, rtrigger) then
 		Graphics.drawImage(720, 40, rtriggerimg)
-    end
-    --\* Draw left trigger button if pressed */
+        end
+        --\* Draw left trigger button if pressed */
 	if Controls.check(pad, ltrigger) then
 		Graphics.drawImage(38, 40, ltriggerimg)
-    end
-    --\* Draw up directional button if pressed */ x113, y91
+        end
+        --\* Draw up directional button if pressed */ x113, y91
 	if Controls.check(pad, up) then
 		Graphics.drawImage(59, 134, dpad)
-    end
-    --\* Draw down directional button if pressed */
+        end
+        --\* Draw down directional button if pressed */
 	if Controls.check(pad, down) then
 		--Graphics.drawRotateImage(94, 231, dpad, 3.14) couldn't make the intergers to work? I may be dumb
 		Graphics.drawImage(59, 190, downimg)
-    end
-    --\* Draw left directional button if pressed */
+        end
+        --\* Draw left directional button if pressed */
 	if Controls.check(pad, left) then
 		--Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work 
 		Graphics.drawImage(25, 167, leftimg)
-    end
-    --\* Draw right directional button if pressed */
+        end
+        --\* Draw right directional button if pressed */
 	if Controls.check(pad, right) then
 		--Graphics.drawRotateImage(123, 203, dpad, 1.57) couldn't make the intergers to work 
 		Graphics.drawImage(83, 167, rightimg)
@@ -179,7 +185,7 @@ while true do
 		Graphics.drawImage(tx6- 50,ty6- 56.5, frontTouch)
 	end
 
--- -50 and -56.5 added because image wasn't placed under finger
+        -- -50 and -56.5 added because image wasn't placed under finger
 
 	--\* Draw front touch on screen */
 	if rtx1 ~= nil then
@@ -202,7 +208,7 @@ while true do
 	end
 
 	--\* Controls to exit app */
-    if Controls.check(pad, start) and Controls.check(pad, select) then	
+        if Controls.check(pad, start) and Controls.check(pad, select) then	
 	    System.exit()
 	end
 	
