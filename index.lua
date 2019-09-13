@@ -2,9 +2,12 @@
 Lua Vita Tester v1.0 by Keinta15            
 
 This is a fork of SMOKE5's VitaTester (https://github.com/SMOKE5/VitaTester) at no point am I claiming this as mine,
-this was just made to test myself that I could convert it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
+this was just made to test myself that I could port it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
 since I'm still learning and it was made as a fun learning experience. 
 ]]
+
+--\* Initiating Sound Device*/
+Sound.init()
 
 --\*init colors*/
 white = Color.new(255,255,255,255)
@@ -34,11 +37,10 @@ backTouch = Graphics.loadImage("app0:/resources/finger_blue.png")
 font = Font.load("app0:/resources/font.ttf")
 Font.setPixelSizes(font,25)
 
---\*init sounds*/
---[[ it crashes? see line 191
-Sound.init()
-snd1 = Sound.openOgg("app0:/resources/Sound1.ogg")
-]]
+--\*loading sounds*/
+
+snd1 = Sound.openOgg("app0:/resources/Test.ogg")
+hsnd1={hsnd1,hsnd1}
 
 --\*init short button names*/
 cross = SCE_CTRL_CROSS
@@ -54,6 +56,16 @@ down = SCE_CTRL_DOWN
 left = SCE_CTRL_LEFT
 right = SCE_CTRL_RIGHT
 
+function soundTest()
+	for s=1,2 do
+		if hsnd1[s]==nil then
+			hsnd1[s] = Sound.openOgg("app0:/resources/Test.ogg")
+			Sound.play(hsnd1[s],NOLOOP)
+			break
+		end
+	end
+end
+
 --\*main loop*/
 while true do
     pad = Controls.read()
@@ -67,7 +79,7 @@ while true do
 	
 	--\* init sticks/touch registration*/
 	rx,ry = Controls.readRightAnalog()
-        lx,ly = Controls.readLeftAnalog()
+    lx,ly = Controls.readLeftAnalog()
 	tx1, ty1, tx2, ty2, tx3, ty3, tx4, ty4, tx5, ty5, tx6, ty6 = Controls.readTouch()
 	rtx1, rty1, rtx2, rty2, rtx4, rty4 = Controls.readRetroTouch()
 	
@@ -80,9 +92,9 @@ while true do
 	Graphics.drawImage(0, 54, bg)
 
 	--\* Display info */
-	Font.print(font, 10, 10, "Lua Vita Button Tester v1.0 by Keinta15", white)
-	Font.print(font, 650, 10, "Press Start + Select to exit", white)
-	--Font.print(font, 650, 20, "Press X to play, O to pause Sound Test", white) it crashes ? see line 191
+	Font.print(font, 10, 10, "Lua Vita Tester v1.1 by Keinta15", white)
+	Font.print(font, 650, 0, "Press Start + Select to exit", white)
+	Font.print(font, 650, 20, "Press X and O for Sound Test", white)
 	Font.print(font, 770, 505, "Right: " .. rx .. ", " .. ry, white)
 	Font.print(font, 10, 505, "Left: " .. lx .. ", " .. ly, white)
 	Font.print(font, 345, 505, "Battery is " .. battcondition .. " at " ..battpercent .. "%", yellow)
@@ -98,49 +110,49 @@ while true do
 	--\* Draw cross button if pressed */
 	if Controls.check(pad, cross) then
 		Graphics.drawImage(830, 202, crossimg)
-        end
+    end
 	--\* Draw square button if pressed */
 	if Controls.check(pad, square) then
 		Graphics.drawImage(790, 165, squareimg)
-        end
+    end
 	--\* Draw circle button if pressed */
 	if Controls.check(pad, circle) then
 		Graphics.drawImage(869, 165, circleimg)
-        end
+    end
     --\* Draw triangle button if pressed */
 	if Controls.check(pad, triangle) then
 		Graphics.drawImage(830, 127, triangleimg)
-        end
+    end
     --\* Draw start button if pressed */
 	if Controls.check(pad, start) then
 		Graphics.drawImage(841, 373, startimg)
-        end
+    end
     --\* Draw select button if pressed */
 	if Controls.check(pad, select) then
 		Graphics.drawImage(781, 375, selectimg)
-        end
+    end
     --\* Draw right trigger button if pressed */
 	if Controls.check(pad, rtrigger) then
 		Graphics.drawImage(720, 40, rtriggerimg)
-        end
+    end
     --\* Draw left trigger button if pressed */
 	if Controls.check(pad, ltrigger) then
 		Graphics.drawImage(38, 40, ltriggerimg)
-        end
+    end
     --\* Draw up directional button if pressed */ x113, y91
 	if Controls.check(pad, up) then
 		Graphics.drawImage(59, 134, dpad)
-        end
+    end
     --\* Draw down directional button if pressed */
 	if Controls.check(pad, down) then
-	      --Graphics.drawRotateImage(94, 231, dpad, 3.14) couldn't make the intergers to work? I may be dumb
+		--Graphics.drawRotateImage(94, 231, dpad, 3.14) couldn't make the intergers to work? I may be dumb
 		Graphics.drawImage(59, 190, downimg)
-        end
+    end
     --\* Draw left directional button if pressed */
 	if Controls.check(pad, left) then
-	      --Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work 
+		--Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work 
 		Graphics.drawImage(25, 167, leftimg)
-        end
+    end
     --\* Draw right directional button if pressed */
 	if Controls.check(pad, right) then
 		--Graphics.drawRotateImage(123, 203, dpad, 1.57) couldn't make the intergers to work 
@@ -167,7 +179,7 @@ while true do
 		Graphics.drawImage(tx6- 50,ty6- 56.5, frontTouch)
 	end
 
-    -- -50 and -56.5 added because image wasn't placed under finger
+-- -50 and -56.5 added because image wasn't placed under finger
 
 	--\* Draw front touch on screen */
 	if rtx1 ~= nil then
@@ -183,23 +195,14 @@ while true do
 		Graphics.drawImage(rtx4- 50,rty4- 113, backTouch)
 	end
 
-	--[[\*Sound Testing*/
-	it crashes, Imma try and figure it out later
-	if Controls.check(pad, cross) then
-		Sound.play(snd1, LOOP)
+	--\*Sound Testing*/
+
+	if Controls.check(pad, cross) and Controls.check(pad, circle) then
+		soundTest()
 	end
-	if Controls.check(pad, circle) and not Sound.isPlaying(snd1) then
-		Sound.pause(snd1)
-	elseif Controls.check(pad, circle) and Sound.isPlaying(snd1) then
-		Sound.resume(snd1)
-	end
-	]]
 
 	--\* Controls to exit app */
-        if Controls.check(pad, start) and Controls.check(pad, select) then
-		Graphics.freeImage(bg)
-		Font.unload(font)
-		Sound.term()
+    if Controls.check(pad, start) and Controls.check(pad, select) then	
 	    System.exit()
 	end
 	
